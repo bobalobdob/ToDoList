@@ -7,10 +7,37 @@
     <title>To Do List</title>
     <meta name="description" content="Creat a todo list for free">
     <link rel="stylesheet" href="css/style.css">
+    <script src="scripts/toDoJS.js"></script>
+
+    <link rel="stylesheet" href="datepicker.min.css">
+    <!-- Via Unpkg CDN -->
+    <!-- <link rel="stylesheet" href="https://unpkg.com/js-datepicker/dist/datepicker.min.css"> -->
 </head>
 <body>
     <header>
         <H1>Create your ToDo List</H1>
     </header>
+    <div id="creat-item">
+        <label for="title">Title: </label>
+        <input id="title" type="text">
+        <span>*</span>
+        <br>
+
+        <label for="description">Description: </label>
+        <textarea id="description" rows="8" cols="25"></textarea>
+        <span></span>
+        <br>
+
+        <label for="start-date"></label>
+        <input id="start-date" class="due-date" type="text">
+        <span></span>
+    </div>
+
+    <script src="datepicker.min.js"></script> 
+    <!-- Via Unpkg CDN -->
+    <!-- <script src="https://unpkg.com/js-datepicker"></script> -->
+    <script>
+        
+    </script>
 </body>
 </html>
