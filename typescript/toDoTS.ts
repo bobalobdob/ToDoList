@@ -20,8 +20,8 @@ window.onload = function(){
 function processNewItem(){
     let item:ToDoItem = getItemFromForm();
     saveItem(item);
-    notifyUser();
-    clearForm();
+    //notifyUser();
+    //clearForm();
 }
 
 /**
@@ -46,4 +46,11 @@ function getItemFromForm(){
     item.urgency = urgencyElem.options[urgencyElem.selectedIndex].value
 
     return item;
+}
+
+function saveItem(item:ToDoItem):void{
+    //ensures user can use local storage
+    if(typeof(Storage) != "undefined"){
+        localStorage.setItem("ToDo", item.title);
+    }
 }
