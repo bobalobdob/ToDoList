@@ -28,9 +28,28 @@
         <span></span>
         <br>
 
-        <label for="start-date"></label>
-        <input id="start-date" class="due-date" type="text">
+        <label for="start-date">Start Date: </label>
+        <input id="start-date" class="due-date" type="date">
         <span></span>
+        <br>
+
+        <label for="end-date">End Date: </label>
+        <input id="end-date" class="due-date" type="date">
+        <span></span>
+        <br>
+
+        <label for="is-complete">Is Complete?</label>
+        <input type="checkbox" id="is-complete">
+        <br>
+
+        <select>
+            <option value="L">Low</option>
+            <option value="M">Medium</option>
+            <option value="H">High</option>
+        </select>
+        <br>
+
+        <button type="button">Add ToDo Item</button>
     </div>
 
     <script src="scripts/datepicker.min.js"></script> 
