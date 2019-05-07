@@ -20,8 +20,29 @@ window.onload = function(){
 function processNewItem(){
     let item:ToDoItem = getItemFromForm();
     saveItem(item);
-    //notifyUser();
-    //clearForm();
+    notifyUser();
+    clearForm();
+}
+
+function clearForm(){
+    //alternatively, we could wrap all inputs with a form tag, then reset the form.
+    //however this is to help me practice typescript/javascript.
+
+    let textElements = document.querySelectorAll("input[type=text, textarea]");
+    for (let index = 0; index < textElements.length; index++) {
+        (<HTMLInputElement>textElements[index]).value = "";
+    }
+
+    //uncheck isComplete
+    let isCompleteBox = <HTMLInputElement>document.querySelector("#is-complete");
+    isCompleteBox.checked = false;
+
+    //reset select list
+    let urgencyList = document.querySelector("#urgency")
+}
+
+function notifyUser(){
+    alert("Your item was saved!");
 }
 
 /**
@@ -49,8 +70,12 @@ function getItemFromForm(){
 }
 
 function saveItem(item:ToDoItem):void{
+    let data:string = JSON.stringify(item);
+    console.log("Converting todoitem into JSON string...");
+    console.log(data);
+
     //ensures user can use local storage
     if(typeof(Storage) != "undefined"){
-        localStorage.setItem("ToDo", item.title);
+        localStorage.setItem("ToDo", data);
     }
 }
