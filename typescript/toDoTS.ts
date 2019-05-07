@@ -15,6 +15,19 @@ class ToDoItem{
 window.onload = function(){
     let addBtn = <HTMLButtonElement>document.querySelector("#create-item > button");
     addBtn.onclick = processNewItem;
+
+    let readItemBtn = <HTMLElement>document.querySelector("#read-item > button");
+    readItemBtn.onclick;
+}
+
+const itemKey:string = "todo";
+
+function readItem(){
+    //get item from storage
+    let item:ToDoItem = JSON.parse(localStorage.getItem(itemKey));
+
+    alert(item.title);
+    alert(item.description);
 }
 
 function processNewItem(){
