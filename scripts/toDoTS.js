@@ -7,9 +7,24 @@ window.onload = function () {
     var addBtn = document.querySelector("#create-item > button");
     addBtn.onclick = processNewItem;
     var readItemBtn = document.querySelector("#read-item > button");
-    readItemBtn.onclick;
+    readItemBtn.onclick = readItem;
 };
 var itemKey = "todo";
+function displayToDo(item) {
+    var todolist = document.getElementById("todo-list");
+    var itemPar = document.createElement("p");
+    itemPar.innerText = item.title;
+    itemPar.setAttribute("data-description", item.description);
+    itemPar.onclick = toggleItemComplete;
+    todolist.appendChild(itemPar);
+}
+function toggleItemComplete() {
+    var currItem = this;
+    currItem.classList.toggle("completed");
+    var title = currItem.innerText;
+    var desc = currItem.getAttribute("data-description");
+    alert("you complete" + title + ":" + desc);
+}
 function readItem() {
     var item = JSON.parse(localStorage.getItem(itemKey));
     alert(item.title);
@@ -20,15 +35,17 @@ function processNewItem() {
     saveItem(item);
     notifyUser();
     clearForm();
+    displayToDo(item);
 }
 function clearForm() {
-    var textElements = document.querySelectorAll("input[type=text, textarea]");
-    for (var index = 0; index < textElements.length; index++) {
-        textElements[index].value = "";
+    var textElements = document.querySelectorAll("input[type=text], textarea");
+    for (var i = 0; i < textElements.length; i++) {
+        textElements[i].value = "";
     }
     var isCompleteBox = document.querySelector("#is-complete");
     isCompleteBox.checked = false;
     var urgencyList = document.querySelector("#urgency");
+    urgencyList.selectedIndex = 0;
 }
 function notifyUser() {
     alert("Your item was saved!");
@@ -51,6 +68,6 @@ function saveItem(item) {
     console.log("Converting todoitem into JSON string...");
     console.log(data);
     if (typeof (Storage) != "undefined") {
-        localStorage.setItem("ToDo", data);
+        localStorage.setItem(itemKey, data);
     }
 }

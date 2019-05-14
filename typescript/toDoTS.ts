@@ -17,10 +17,28 @@ window.onload = function(){
     addBtn.onclick = processNewItem;
 
     let readItemBtn = <HTMLElement>document.querySelector("#read-item > button");
-    readItemBtn.onclick;
+    readItemBtn.onclick = readItem;
 }
 
 const itemKey:string = "todo";
+
+function displayToDo(item:ToDoItem){
+    let todolist = document.getElementById("todo-list");
+    let itemPar = document.createElement("p");
+    itemPar.innerText = item.title;
+    itemPar.setAttribute("data-description", item.description);
+    itemPar.onclick = toggleItemComplete;
+
+    todolist.appendChild(itemPar);
+}
+
+function toggleItemComplete(){
+    let currItem:HTMLElement = this;
+    currItem.classList.toggle("completed");
+    let title = currItem.innerText;
+    let desc = currItem.getAttribute("data-description");
+    alert("you complete" + title +":" + desc);
+}
 
 function readItem(){
     //get item from storage
@@ -35,24 +53,28 @@ function processNewItem(){
     saveItem(item);
     notifyUser();
     clearForm();
+    displayToDo(item);
 }
 
 function clearForm(){
-    //alternatively, we could wrap all inputs with a form tag, then reset the form.
-    //however this is to help me practice typescript/javascript.
+    //We could alternatively, wrap all inputs in
+    //a <form> and reset the form
 
-    let textElements = document.querySelectorAll("input[type=text, textarea]");
-    for (let index = 0; index < textElements.length; index++) {
-        (<HTMLInputElement>textElements[index]).value = "";
+    //clear all textboxes and textarea
+    let textElements = document.querySelectorAll("input[type=text], textarea");
+    for(let i = 0; i < textElements.length; i++){
+        (<HTMLInputElement>textElements[i]).value = "";
     }
 
-    //uncheck isComplete
+    //uncheck is complete
     let isCompleteBox = <HTMLInputElement>document.querySelector("#is-complete");
     isCompleteBox.checked = false;
 
     //reset select list
-    let urgencyList = document.querySelector("#urgency")
+    let urgencyList = <HTMLSelectElement>document.querySelector("#urgency");
+    urgencyList.selectedIndex = 0;
 }
+
 
 function notifyUser(){
     alert("Your item was saved!");
@@ -83,12 +105,14 @@ function getItemFromForm(){
 }
 
 function saveItem(item:ToDoItem):void{
+
     let data:string = JSON.stringify(item);
     console.log("Converting todoitem into JSON string...");
     console.log(data);
 
-    //ensures user can use local storage
+    //ensure user can use localStorage
     if(typeof(Storage) != "undefined"){
-        localStorage.setItem("ToDo", data);
+        localStorage.setItem(itemKey, data);
     }
 }
+
