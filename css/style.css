@@ -1,0 +1,15 @@
+
+div#todo-list > p{
+    background-color: red;
+    color: white;
+    padding: .5em;
+    border-radius: .2em;
+    width: 33%;
+    display: inline-block;
+    margin-right: .5em;
+}
+
+p.completed{
+    text-decoration: line-through;
+    background: green !important;
+}
