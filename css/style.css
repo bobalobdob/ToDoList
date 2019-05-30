@@ -13,3 +13,13 @@ p.completed{
     text-decoration: line-through;
     background: green !important;
 }
+
+h1{
+    text-align: center;
+}
+
+div#create-item{
+    background-color: grey;
+    border-style: dashed;
+    text-align: center;
+}
